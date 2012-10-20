@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <fragment
+        android:id="@+id/f_add_contact_recipient"
+        android:name="com.sms.scheduler.fragments.RecipientFragment"
+        android:layout_width="match_parent"
+        android:layout_height="100dip" />
+
+    <LinearLayout
+        android:id="@+id/ll_add_contact_switch"
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        android:layout_below="@id/f_add_contact_recipient"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/b_ll_add_contact_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Contacts"
+            android:textSize="18sp" 
+            android:onClick="showContacts"/>
+
+        <Button
+            android:id="@+id/b_ll_add_contact_recent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Recent"
+            android:textSize="18sp" 
+            android:onClick="showRecent"/>
+
+        <Button
+            android:id="@+id/b_ll_add_contact_groups"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Groups"
+            android:textSize="18sp" 
+            android:onClick="showGroups"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_add_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_add_contact_switch" >
+    </LinearLayout>
+
+</RelativeLayout>

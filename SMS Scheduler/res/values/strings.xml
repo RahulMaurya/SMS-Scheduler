@@ -1,0 +1,29 @@
+<resources>
+
+    
+    <string name="hello_world">Hello world!</string>
+    <string name="app_name">SMS Scheduler</string>
+	<string name="menu_settings">Settings</string>
+	<string name="sch_activity_title">Scheduled Messages</string>
+	<string name="test">Test String</string>
+	<string name="sch_recepient_to_label">To:</string>
+	<string name="title_activity_new">New</string>
+	<string name="to">To</string>
+	<string name="title_activity_add_contact">AddContact</string>
+	<string name="recipients">Recipients</string>
+	<string name="new_quick_time_label">Quick Time</string>
+	<string name="menu_new_message">New Message</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_sort">Sort</string>
+
+    <string name="title_activity_test">Test</string>
+    
+    <!-- My added non sync code -->
+
+    
+    
+    <!-- Coode ends -->
+
+    
+
+</resources>

@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/et_new_to"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/margin_medium"
+        android:ems="10"
+        android:hint="@string/to"
+        android:onClick="grabContacts" >
+
+        <requestFocus />
+    </EditText>
+
+    <LinearLayout
+        android:id="@+id/ll_new_schedule_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_new_to"
+        android:layout_margin="@dimen/margin_medium"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_new_rl_scheduled_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/margin_medium"
+            android:background="#818181"
+            android:clickable="true"
+            android:onClick="datePicker"
+            android:text="scheduled date here"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_new_rl_scheduled_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:layout_marginLeft="15dp"
+            android:background="#818181"
+            android:clickable="true"
+            android:onClick="timePicker"
+            android:text="time here"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/s_new_ll_quick_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_new_message_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@id/et_new_to"
+        android:layout_alignRight="@id/et_new_to"
+        android:layout_below="@id/ll_new_schedule_details"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="textMultiLine" />
+
+</RelativeLayout>

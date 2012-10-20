@@ -1,0 +1,12 @@
+<resources>
+    
+	<dimen name="padding_small">4dp</dimen>
+	<dimen name="padding_medium">8dp</dimen>
+	<dimen name="padding_large">16dp</dimen>
+	<dimen name="sch_color_label_width">5dip</dimen>
+	<dimen name="margin_small">5dp</dimen>
+	<dimen name="margin_large">15dp</dimen>
+	<dimen name="margin_medium">10dp</dimen>
+	<dimen name="sch_month_date_text_size">20sp</dimen>
+	    
+</resources>
