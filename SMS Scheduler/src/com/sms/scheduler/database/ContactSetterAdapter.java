@@ -27,7 +27,7 @@ public class ContactSetterAdapter extends BaseAdapter {
 	public ContactSetterAdapter	(Activity activity, ArrayList<HashMap<String, String>> data) {
 		this.activity = activity;
 		this.data=data;
-		Log.v("ContactSetterAdapter", "datasize is "+data.size());
+		Log.v("ContactSetterAdapter", "datasize is: "+data.size());
 		ContactSetterAdapter.inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.image_loader=new ContactImageLoader(activity.getApplicationContext());
 		
