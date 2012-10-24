@@ -46,10 +46,11 @@ public class AddContact extends FragmentActivity   {
 		fragmentTransaction = fragmentManager.beginTransaction();
 
 		Fragment fragment = new ContactsFragment();
+		Log.v("Add Contact", "showContacts Method");
 		fragmentTransaction.replace(R.id.ll_add_fragment_container, fragment);
 		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		fragmentTransaction.commit();
-		fragmentManager.executePendingTransactions();
+		//fragmentManager.executePendingTransactions();
 		
 		Log.v("Add contact","In method show Contacts after committing");
 	}
