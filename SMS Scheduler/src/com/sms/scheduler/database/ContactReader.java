@@ -5,15 +5,18 @@ package com.sms.scheduler.database;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.content.CursorLoader;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.SimpleAdapter;
+import android.widget.SimpleAdapter.ViewBinder;
 
-import com.sms.scheduler.activities.ScheduledMessages;
+import com.sms.scheduler.activities.R;
 
 
 public class ContactReader/* extends IntentService*/{
@@ -26,13 +29,14 @@ public class ContactReader/* extends IntentService*/{
 	static Uri contact_name_uri = ContactsContract.Contacts.CONTENT_URI;
 	static Uri contact_phone_uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
 
-	static ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
+	public static ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
 	static Cursor contact_list_cursor;
-	static ContactSetterAdapter contact_adapter;
-	static Activity activity;
-	public ContactReader(Activity activity){
+	static Context context;
+	public static SimpleAdapter adapter;
+
+	public ContactReader(Context context){
 		Log.v("ContactReader" ,"In Constructor");		
-		this.activity = activity;
+		this.context = context;
 		ContactReader.readIntoCursor();
 	}
 	/*public ContactReader() {
@@ -43,14 +47,14 @@ public class ContactReader/* extends IntentService*/{
 	@Override
 	protected void onHandleIntent(Intent arg0) {
 
-		
+
 		readIntoCursor();
 
 	}*/
 
 	public static void readIntoCursor(){
 
-		CursorLoader cursorLoader = new CursorLoader(activity, contact_name_uri, null, null, null, null);
+		CursorLoader cursorLoader = new CursorLoader(context, contact_name_uri, null, null, null, null);
 		contact_list_cursor = cursorLoader.loadInBackground();
 
 		if (contact_list_cursor.moveToFirst()) {
@@ -64,26 +68,57 @@ public class ContactReader/* extends IntentService*/{
 
 				if (hasPhone == 1) 
 				{
-					Cursor phoneCursor = activity.getContentResolver().query(contact_phone_uri, null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactID, null, null);
+					Cursor phoneCursor = context.getContentResolver().query(contact_phone_uri, null,ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactID, null, null);
 					while (phoneCursor.moveToNext()) {
 
 						String phoneNumber = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 						map.put(KEY_NAME, contactDisplayName);
 						map.put(KEY_PHONE_NUMBER, phoneNumber);
 						map.put(KEY_CONTACT_THUMB,contactID);//contact ID is passed to get Image thumb
-					
+
 						contactList.add(map);
+						Log.v("ContactReader", map.toString());
 					}
-					
+
 					phoneCursor.close();
 				}
-				
+
 			}while (contact_list_cursor.moveToNext());
 		}
 
-	
-	contact_list_cursor.close();
-	
-	ContactSetterAdapter.adapter = new ContactSetterAdapter(activity, contactList);
+
+		contact_list_cursor.close();
+		//Log.v("ContactReader", contactList.toString());
+
+
+
+		String from[] = {
+				KEY_NAME,
+				KEY_PHONE_NUMBER,
+				KEY_CONTACT_THUMB
+		};
+		int to[] = {
+				R.id.tv_add_contact_display_name,
+				R.id.tv_add_contact_phone_number,
+				R.id.iv_add_contact_display_image,
+
+		};
+
+
+		adapter = new SimpleAdapter(context, contactList, R.layout.display_contact_details, from, to);
+		adapter.setViewBinder(new ViewBinder() {
+
+			public boolean setViewValue(View view, Object data,	String textRepresentation) {
+				int v = view.getId();
+				if(v == R.id.iv_add_contact_display_image ){
+					ImageView iv = (ImageView) view;
+					iv.setImageBitmap(new ContactImageLoader(context).displayImage(data.toString()));
+				}
+
+				return false;
+			}
+		});
+		
+		Log.v("ContactReader", adapter.isEmpty()+"");
 	}
 }

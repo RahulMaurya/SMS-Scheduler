@@ -13,7 +13,6 @@ import android.widget.ListView;
 
 import com.sms.scheduler.activities.R;
 import com.sms.scheduler.database.ContactReader;
-import com.sms.scheduler.database.ContactSetterAdapter;
 
 @TargetApi(5)
 public class ContactsFragment extends Fragment{
@@ -24,10 +23,14 @@ public class ContactsFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.v("Contact Fragment" ,"In Oncreate()");
-		new ContactReader(this.getActivity());
-		list=(ListView)getActivity().findViewById(R.id.list);
-		Log.v("Contact Fragment" ,"Setting Adapter");
-		list.setAdapter(ContactSetterAdapter.adapter);
+		new ContactReader(this.getActivity().getApplicationContext());
+		list=(ListView)this.getActivity().findViewById(R.id.list);
+		Log.v("ContactsFragment" ,"Setting Adapter");
+		
+		Log.v("ArrayListValues", ContactReader.contactList.toString());
+		Log.v("ContactReader", ContactReader.adapter.isEmpty()+"");
+		Log.v("ContactReader", ContactReader.adapter.getCount()+"");
+		list.setAdapter(ContactReader.adapter);
 	
 	}
 
