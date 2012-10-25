@@ -5,14 +5,17 @@ package com.sms.scheduler.database;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.content.CursorLoader;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleAdapter.ViewBinder;
 
@@ -26,19 +29,15 @@ public class ContactReader/* extends IntentService*/{
 	static final String KEY_PHONE_TYPE = "phone type";
 	static final String KEY_CONTACT_THUMB = "contact image";
 
-	static Uri contact_name_uri = ContactsContract.Contacts.CONTENT_URI;
-	static Uri contact_phone_uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+	Uri contact_name_uri = ContactsContract.Contacts.CONTENT_URI;
+	Uri contact_phone_uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
 
-	public static ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
-	static Cursor contact_list_cursor;
-	static Context context;
-	public static SimpleAdapter adapter;
+	ArrayList<HashMap<String, String>> contactList = new ArrayList<HashMap<String, String>>();
+	Cursor contact_list_cursor;
+	
+	Activity activity;
+	
 
-	public ContactReader(Context context){
-		Log.v("ContactReader" ,"In Constructor");		
-		this.context = context;
-		ContactReader.readIntoCursor();
-	}
 	/*public ContactReader() {
 		super("IntentService");
 
@@ -52,7 +51,7 @@ public class ContactReader/* extends IntentService*/{
 
 	}*/
 
-	public static void readIntoCursor(){
+	public  ArrayList<HashMap<String, String>> readIntoCursor(Context context){
 
 		CursorLoader cursorLoader = new CursorLoader(context, contact_name_uri, null, null, null, null);
 		contact_list_cursor = cursorLoader.loadInBackground();
@@ -88,37 +87,7 @@ public class ContactReader/* extends IntentService*/{
 
 
 		contact_list_cursor.close();
-		//Log.v("ContactReader", contactList.toString());
-
-
-
-		String from[] = {
-				KEY_NAME,
-				KEY_PHONE_NUMBER,
-				KEY_CONTACT_THUMB
-		};
-		int to[] = {
-				R.id.tv_add_contact_display_name,
-				R.id.tv_add_contact_phone_number,
-				R.id.iv_add_contact_display_image,
-
-		};
-
-
-		adapter = new SimpleAdapter(context, contactList, R.layout.display_contact_details, from, to);
-		adapter.setViewBinder(new ViewBinder() {
-
-			public boolean setViewValue(View view, Object data,	String textRepresentation) {
-				int v = view.getId();
-				if(v == R.id.iv_add_contact_display_image ){
-					ImageView iv = (ImageView) view;
-					iv.setImageBitmap(new ContactImageLoader(context).displayImage(data.toString()));
-				}
-
-				return false;
-			}
-		});
 		
-		Log.v("ContactReader", adapter.isEmpty()+"");
+		return contactList;
 	}
 }

@@ -1,6 +1,7 @@
 package com.sms.scheduler.activities;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,10 +44,22 @@ public class ScheduledMessages extends ListActivity  {
 		super.onCreate(savedInstanceState);
 		dataSource = new MessageDataSource(this);
 		dataSource.open();
+
+		/*//Test Code to add some fields in database
+		ArrayList<Contact> contacts = new ArrayList<Contact>();
+		contacts.add(new Contact("divya","9560430532"));
+		Log.d("TAG", "Contact created.");
+		Calendar date = Calendar.getInstance();        
+		date.set(Calendar.DAY_OF_MONTH, 29);
+		dataSource.addMessage(contacts, "this is test test  text", date, Message.MESSAGE_TYPE_SCHEDULED);        
+		Log.d("TAG","Row inserted in database");*/
+
 		/*ApplicationContext = this.getApplicationContext();
 		Intent i = new Intent(this, com.sms.scheduler.database.ContactReader.class);
 		startService(i);*/
-		
+
+		Intent newIntent = new Intent("com.sms.scheduler.activities.New");
+		startActivity(newIntent);
 
 		List<Message> messageList = dataSource.getAllMessages();        
 
@@ -118,6 +132,7 @@ public class ScheduledMessages extends ListActivity  {
 
 			public boolean setViewValue(View view, Object data,String textRepresentation) {
 				int v=view.getId();
+				//Log.v("ScheduledMessages", "in ViewBinder");
 				if(v==R.id.tv_sch_color_label){
 					view.setBackgroundColor(Integer.parseInt(data.toString()));
 				}else{

@@ -14,6 +14,7 @@ public class ContactImageLoader {
 	Context context;
 
 	public ContactImageLoader(Context applicationContext) {
+		Log.v("ContactImageLoader", "In constructor");
 		context = applicationContext;
 	}
 
@@ -31,6 +32,7 @@ public class ContactImageLoader {
 				byte[] data = cursor.getBlob(0);
 				if (data != null) {
 					Bitmap image = BitmapFactory.decodeByteArray(data, 0, data.length);
+					Log.v("Contact Image Loader", "Image Found and returned");
 					return image;
 				}
 				else

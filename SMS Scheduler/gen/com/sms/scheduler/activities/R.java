@@ -21,10 +21,14 @@ public final class R {
         public static final int sch_month_date_text_size=0x7f040007;
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int ic_new_message=0x7f020002;
-        public static final int temp_icon=0x7f020003;
+        public static final int gradient_bg=0x7f020000;
+        public static final int gradient_bg_hover=0x7f020001;
+        public static final int ic_action_search=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int ic_new_message=0x7f020004;
+        public static final int image_bg=0x7f020005;
+        public static final int list_selector=0x7f020006;
+        public static final int temp_icon=0x7f020007;
     }
     public static final class id {
         public static final int b_ll_add_contact_contacts=0x7f080002;
@@ -36,33 +40,32 @@ public final class R {
         public static final int f_add_contact_list=0x7f08000c;
         public static final int f_add_contact_recipient=0x7f080000;
         public static final int iv_add_contact_display_image=0x7f08000d;
-        public static final int list=0x7f080011;
         public static final int ll_add_contact_switch=0x7f080001;
         public static final int ll_add_fragment_container=0x7f080005;
         public static final int ll_new_schedule_details=0x7f080007;
-        public static final int ll_sch_msg_container_first_row=0x7f08001a;
-        public static final int menu_sch_delete=0x7f080022;
-        public static final int menu_sch_new_message=0x7f080021;
-        public static final int menu_sch_sort=0x7f080023;
-        public static final int menu_settings=0x7f080020;
-        public static final int rl_sch_date_container=0x7f080014;
-        public static final int rl_sch_msg_container=0x7f080019;
+        public static final int ll_sch_msg_container_first_row=0x7f080019;
+        public static final int menu_sch_delete=0x7f080021;
+        public static final int menu_sch_new_message=0x7f080020;
+        public static final int menu_sch_sort=0x7f080022;
+        public static final int menu_settings=0x7f08001f;
+        public static final int rl_sch_date_container=0x7f080013;
+        public static final int rl_sch_msg_container=0x7f080018;
         public static final int s_new_ll_quick_time=0x7f08000a;
-        public static final int text1_rec=0x7f080012;
+        public static final int text1_rec=0x7f080011;
         public static final int tv_add_contact_display_name=0x7f08000e;
         public static final int tv_add_contact_phone_number=0x7f08000f;
-        public static final int tv_add_recipient_list=0x7f080013;
+        public static final int tv_add_recipient_list=0x7f080012;
         public static final int tv_new_rl_scheduled_date=0x7f080008;
         public static final int tv_new_rl_scheduled_time=0x7f080009;
-        public static final int tv_sch_color_label=0x7f08001d;
-        public static final int tv_sch_date=0x7f080016;
-        public static final int tv_sch_month=0x7f080015;
-        public static final int tv_sch_msg_body=0x7f08001e;
-        public static final int tv_sch_recepient_container=0x7f08001c;
-        public static final int tv_sch_recepient_to=0x7f08001b;
-        public static final int tv_sch_time=0x7f080018;
-        public static final int tv_sch_time_left=0x7f08001f;
-        public static final int tv_sch_year=0x7f080017;
+        public static final int tv_sch_color_label=0x7f08001c;
+        public static final int tv_sch_date=0x7f080015;
+        public static final int tv_sch_month=0x7f080014;
+        public static final int tv_sch_msg_body=0x7f08001d;
+        public static final int tv_sch_recepient_container=0x7f08001b;
+        public static final int tv_sch_recepient_to=0x7f08001a;
+        public static final int tv_sch_time=0x7f080017;
+        public static final int tv_sch_time_left=0x7f08001e;
+        public static final int tv_sch_year=0x7f080016;
     }
     public static final class layout {
         public static final int activity_add_contact=0x7f030000;
@@ -72,10 +75,9 @@ public final class R {
         public static final int activity_test=0x7f030004;
         public static final int contact_details=0x7f030005;
         public static final int display_contact_details=0x7f030006;
-        public static final int fragment_contact=0x7f030007;
-        public static final int fragment_recent=0x7f030008;
-        public static final int recipients=0x7f030009;
-        public static final int scheduled_message_list_item=0x7f03000a;
+        public static final int fragment_recent=0x7f030007;
+        public static final int recipients=0x7f030008;
+        public static final int scheduled_message_list_item=0x7f030009;
     }
     public static final class menu {
         public static final int activity_add_contact=0x7f070000;
