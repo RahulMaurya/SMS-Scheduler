@@ -72,6 +72,8 @@ public class ContactsFragment extends ListFragment{
 						iv.setImageBitmap(ret_image);
 				
 					}
+					return true;
+					
 				}
 				return false;
 			}

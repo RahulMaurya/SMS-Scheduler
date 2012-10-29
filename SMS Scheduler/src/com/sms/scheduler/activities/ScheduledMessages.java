@@ -8,11 +8,19 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +32,7 @@ import com.sms.scheduler.database.MessageDataSource;
 /*
  * This Class is the activity displaying list of scheduled messages in a vertical list.
  */
-public class ScheduledMessages extends ListActivity  {
+public class ScheduledMessages extends ListActivity {
 
 	//private static final String TAG = "Scheduled Messages";
 	private static final String DATE_LABEL = "date";
@@ -35,32 +43,36 @@ public class ScheduledMessages extends ListActivity  {
 	private static final String BODY_LABEL = "body";
 	private static final String TIME_LEFT_LABEL = "timeleft";
 	private static final String TIME_LEFT_LABEL_COLOR = "timeLabelColor";
-
+	private static final String TAG = "Scheduled Messages";
+	private ActionMode mActionMode;
 	public static Context ApplicationContext;
-
+	
 	MessageDataSource dataSource;
+	ListView mListView;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		dataSource = new MessageDataSource(this);
 		dataSource.open();
-
-		/*//Test Code to add some fields in database
+		mListView = getListView();
+		
+		//Test Code to add some fields in database
 		ArrayList<Contact> contacts = new ArrayList<Contact>();
 		contacts.add(new Contact("divya","9560430532"));
 		Log.d("TAG", "Contact created.");
 		Calendar date = Calendar.getInstance();        
 		date.set(Calendar.DAY_OF_MONTH, 29);
 		dataSource.addMessage(contacts, "this is test test  text", date, Message.MESSAGE_TYPE_SCHEDULED);        
-		Log.d("TAG","Row inserted in database");*/
+		Log.d("TAG","Row inserted in database");
 
 		/*ApplicationContext = this.getApplicationContext();
 		Intent i = new Intent(this, com.sms.scheduler.database.ContactReader.class);
 		startService(i);*/
-
+/*
 		Intent newIntent = new Intent("com.sms.scheduler.activities.New");
 		startActivity(newIntent);
-
+*/
 		List<Message> messageList = dataSource.getAllMessages();        
 
 
@@ -132,7 +144,7 @@ public class ScheduledMessages extends ListActivity  {
 
 			public boolean setViewValue(View view, Object data,String textRepresentation) {
 				int v=view.getId();
-				//Log.v("ScheduledMessages", "in ViewBinder");
+				//Log.v("ScheduledMessages", "in ViewBinder");				
 				if(v==R.id.tv_sch_color_label){
 					view.setBackgroundColor(Integer.parseInt(data.toString()));
 				}else{
@@ -143,9 +155,61 @@ public class ScheduledMessages extends ListActivity  {
 			}
 		});
 		/*Code Ends*/
+		setListAdapter(mAdapter);		
+		
+		
+		
+		/*Check for Android version and then choose to show Context Menu or Contextual Action Bar*/
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){			
+			/*Registering ListView for Context Menu*/
+			registerForContextMenu(mListView);		
+			
+		}else{
+			/* Setting OnLongClick on list items */		
+			mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
-		setListAdapter(mAdapter);
+				public boolean onItemLongClick(AdapterView<?> adapterView, View view,
+						int pos, long id) {
+					// TODO Auto-generated method stub
+					toast("Message");				
+					return true;
+				}
+			
+			});			 
+		}				
+		
+	}
 
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		// TODO Auto-generated method stub
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflator = getMenuInflater();
+		inflator.inflate(R.menu.activity_sch_context_menu, menu);		
+	}
+	
+	
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo();
+		switch (item.getItemId()) {
+		case R.id.menu_sch_context_delete:
+			removeItemFromList(item.getItemId());
+			toast("Delet item with id "+item.getItemId());
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}					
+	}
+	
+	
+
+	private void removeItemFromList(int itemId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
